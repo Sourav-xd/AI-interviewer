@@ -1,3 +1,4 @@
+#memory_service.py
 from typing import List, Dict, Any
 import numpy as np
 import faiss
@@ -90,7 +91,7 @@ class MemoryService:
         weak_topics = []
         for topic, scores in topic_scores.items():
             avg_score = sum(scores)/len(scores)
-            if avg_score < 0.6:
+            if avg_score < 0.4:
                 weak_topics.append(topic)
         
         return weak_topics
@@ -112,7 +113,7 @@ class MemoryService:
 
         for topic, scores in topic_scores.items():
             avg = sum(scores)/len(scores)
-            if avg >= 0.7:
+            if avg >= 0.5:
                 strengths.append(topic)
             else:
                 weaknesses.append(topic)
@@ -125,4 +126,4 @@ class MemoryService:
     
 
 # Singleton instance (process-level memory)
-memory_service = MemoryService()
+#memory_service = MemoryService()

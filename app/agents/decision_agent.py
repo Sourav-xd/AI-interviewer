@@ -6,7 +6,9 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_groq import ChatGroq
 from langchain_core.output_parsers import PydanticOutputParser
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
+from typing import Union, List
+
 
 load_dotenv()
 
@@ -26,7 +28,17 @@ llm = ChatGroq(
 
 
 class DecisionOutput(BaseModel):
-    decision: str
+    #decision: str
+    decision: Union[str, List[str]]
+
+    @field_validator("decision")
+    @classmethod
+    def normalize_decision(cls, v):
+        if isinstance(v, list):
+            if len(v) != 1:
+                raise ValueError("Only one decision allowed")
+            return v[0]
+        return v
 
 #json_parser = JsonOutputParser()
 json_parser = PydanticOutputParser(pydantic_object=DecisionOutput)

@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from app.services.orchestrator_registry import orchestrators
-from app.services.memory_service import memory_service
+#from app.services.memory_service import memory_service
 
 router = APIRouter(prefix="/interviews", tags=["Interviews"])
 
@@ -97,7 +97,7 @@ def get_interview_summary(session_id: str):
     if not state:
         raise HTTPException(status_code=404, detail="Interview state not found")
 
-    profile = memory_service.summarize_candidate_profile()
+    profile = orchestrator.memory.summarize_candidate_profile()
 
     return {
         "session_id": session_id,

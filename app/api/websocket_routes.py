@@ -39,7 +39,7 @@ async def interview_websocket(websocket: WebSocket, session_id: str):
         await websocket.send_json({
             "type": "info",
             "payload": {
-                "message": "Interview started. Please answer the first question."
+                "message": "Interview is getting started. Shall we start?."
             }
         })
 

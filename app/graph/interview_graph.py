@@ -17,6 +17,10 @@ def evaluate_answer_node(state: InterviewState)-> InterviewState:
 
     #state.knowledge_evaluation = evaluation
     state.knowledge_evaluation = evaluation.model_dump()
+    
+    for topic in state.knowledge_evaluation.get("detected_topics", []):
+        if topic not in state.topics_covered:
+            state.topics_covered.append(topic)
 
     state.interview_round += 1
 

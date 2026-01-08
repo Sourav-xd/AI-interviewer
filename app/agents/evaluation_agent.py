@@ -30,6 +30,7 @@ class EvaluationOutput(BaseModel):
     correctness_score: float
     depth_level: str
     follow_up_needed: bool
+    detected_topics: list[str]
 
 
 
@@ -70,6 +71,10 @@ Evaluation guidelines:
 - follow_up_needed:
     true if answer is shallow or partially correct
     false if answer is sufficient for L0
+- detected_topics:
+  List the main technical topics explicitly mentioned.
+  Examples: ["Python"], ["OOP"], ["JavaScript"]
+  If none, return ["general"]
 
 Question:
 {question}
@@ -102,10 +107,10 @@ def evaluate_knowledge(context: dict) -> dict:
     return evaluation
 
 
-test_context = {
-    "question": "What is Python?",
-    "answer": "Python is a programming language used for many things."
-}
+# test_context = {
+#     "question": "What is Python?",
+#     "answer": "Python is a programming language used for many things."
+# }
 
-result = evaluate_knowledge(test_context)
-print(result)
+# result = evaluate_knowledge(test_context)
+# print(result)
