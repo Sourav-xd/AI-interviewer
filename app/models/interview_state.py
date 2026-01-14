@@ -28,6 +28,8 @@ class InterviewState(BaseModel):
     confidence_score: float = 0.5
     emotion_state: str = "calm"
 
+    current_anomaly: Optional[str] = None # e.g. "Multiple faces"
+
     topics_covered: List[str] = Field(default_factory=list)
 
     decision: Optional[DecisionType] = None

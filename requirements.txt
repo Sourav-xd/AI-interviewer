@@ -4,3 +4,10 @@ langchain
 langchain-core
 langchain-community
 python-dotenv
+opencv-python
+mediapipe
+fer
+numpy
+openai
+python-multipart
+pydub
